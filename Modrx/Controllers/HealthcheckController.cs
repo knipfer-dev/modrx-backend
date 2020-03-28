@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Modrx.Controllers
@@ -10,7 +11,14 @@ namespace Modrx.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(new { timestamp = DateTime.Now.ToString("o") });
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            if (string.IsNullOrWhiteSpace(environment))
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, "Environment not set.");
+            }
+
+            return Ok(new { timestamp = DateTime.Now.ToString("o"), environment = environment });
         }
     }
 }
