@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Modrx;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using NpgsqlTypes;
 
 namespace Modrx.Migrations
 {
@@ -34,7 +35,13 @@ namespace Modrx.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<NpgsqlTsVector>("SearchVector")
+                        .HasColumnType("tsvector");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SearchVector")
+                        .HasAnnotation("Npgsql:IndexMethod", "GIN");
 
                     b.ToTable("SubaruDealers");
                 });
