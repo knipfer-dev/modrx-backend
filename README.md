@@ -8,6 +8,6 @@ Backend for modrx
 
 3.) Run `dotnet restore` to ensure all dependencies are restored
 
-4.) Run initial migration with `dotnet ef database update InitialMigration`
+4.) Run initial migration with `dotnet ef database update`
 
 5.) Run in watch mode `dotnet watch run`, starts server on port 5000
