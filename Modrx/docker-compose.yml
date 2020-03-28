@@ -1,6 +1,18 @@
-version: '2.4'
+version: "2.4"
 
 services:
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-modrxdev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-localhost}
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4:latest
@@ -10,8 +22,8 @@ services:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@localhost
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
-       - ./data/pgadmin:/var/lib/pgadmin
-       - ./data/pgadmin/servers.json:/pgadmin4/servers.json
+      - ./data/pgadmin:/var/lib/pgadmin
+      - ./data/pgadmin/servers.json:/pgadmin4/servers.json
     ports:
       - "5050:80"
     restart: unless-stopped
