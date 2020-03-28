@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Modrx.Repository;
+using Modrx.Repository.Interface;
 
 namespace Modrx
 {
@@ -22,6 +24,7 @@ namespace Modrx
             services.AddControllers();
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(opt =>
                 opt.UseNpgsql(Configuration.GetConnectionString("PostgresConnectionString")));
+            services.AddTransient<IDealerRepository, DealerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
