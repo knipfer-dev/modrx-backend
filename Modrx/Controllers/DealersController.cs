@@ -24,8 +24,11 @@ namespace Modrx.Controllers
                 var dealers = _dealerRepository.GetAllDealers();
                 return Ok(dealers);
             }
-
-            return Ok();
+            else
+            {
+                var dealers = _dealerRepository.SearchDealers(search);
+                return Ok(dealers);
+            }
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Modrx.Repository.Interface
     public interface IDealerRepository
     {
         List<SubaruDealer> GetAllDealers();
+        List<SubaruDealer> SearchDealers(string keyword);
     }
 }
